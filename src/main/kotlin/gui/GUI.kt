@@ -1,27 +1,23 @@
 package gui
 
 import org.lwjgl.glfw.GLFW.*
-import org.lwjgl.glfw.*
-
+import org.lwjgl.glfw.GLFWErrorCallback
+import org.lwjgl.glfw.GLFWKeyCallback
 import org.lwjgl.opengl.GL
-
-import org.lwjgl.opengles.GLES20.*
-
+import org.lwjgl.opengl.GL11.*
 import org.lwjgl.system.MemoryUtil.NULL
 
-class GUI
-{
+class GUI {
 
 
-    private var errorCallback : GLFWErrorCallback? = null
-    private var keyCallback : GLFWKeyCallback? = null
+    private var errorCallback: GLFWErrorCallback? = null
+    private var keyCallback: GLFWKeyCallback? = null
     var window: Long? = null
 
-    fun init(): GUI
-    {
+    fun init(): GUI {
         errorCallback = glfwSetErrorCallback(GLFWErrorCallback.createPrint(System.err))
 
-        if ( glfwInit() != GLFW_TRUE )
+        if (!glfwInit())
             throw IllegalStateException("Unable to initialize GLFW")
 
         glfwDefaultWindowHints()
@@ -34,14 +30,16 @@ class GUI
             throw RuntimeException("Failed to create the GLFW window")
 
         keyCallback = glfwSetKeyCallback(window!!, object : GLFWKeyCallback() {
-            override fun invoke(window: kotlin.Long,
-                                key: kotlin.Int,
-                                scancode: kotlin.Int,
-                                action: kotlin.Int,
-                                mods: kotlin.Int) {
+            override fun invoke(
+                window: kotlin.Long,
+                key: kotlin.Int,
+                scancode: kotlin.Int,
+                action: kotlin.Int,
+                mods: kotlin.Int
+            ) {
 
-                if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-                    glfwSetWindowShouldClose(window, GLFW_TRUE)
+                if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
+                    glfwSetWindowShouldClose(window, true)
 
             }
         })
@@ -53,8 +51,7 @@ class GUI
         GL.createCapabilities()
         glClearColor(1.0f, 0.0f, 0.0f, 0.0f)
 
-        while (glfwWindowShouldClose(window!!) == GLFW_FALSE )
-        {
+        while (!glfwWindowShouldClose(window!!)) {
             glClear(GL_COLOR_BUFFER_BIT or GL_DEPTH_BUFFER_BIT)
             glfwSwapBuffers(window!!)
             glfwPollEvents()

@@ -3,11 +3,10 @@ import sandbox.Manager
 
 object Main {
 
-    lateinit var gui: GUI
+    private lateinit var gui: GUI
 
     @JvmStatic
-    fun main(args: Array<String>)
-    {
+    fun main(args: Array<String>) {
 
         Manager.init()
 

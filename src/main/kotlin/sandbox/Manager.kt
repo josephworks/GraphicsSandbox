@@ -12,11 +12,10 @@ import javax.script.SimpleBindings
 object Manager {
 
     val factory = NashornScriptEngineFactory()
-    val engine = factory.getScriptEngine()
+    val engine = factory.scriptEngine
     val bindings: Bindings = SimpleBindings()
 
-    fun init()
-    {
+    fun init() {
         bindings.put("Color", ColorBinds())
         bindings.put("Scene", SceneBinds())
 
