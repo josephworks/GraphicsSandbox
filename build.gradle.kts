@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "1.6.10"
 }
 
 group = "dev.trapss"
@@ -12,7 +12,14 @@ repositories {
 }
 
 dependencies {
-    implementation("org.lwjgl:lwjgl:3.0.0b")
+    implementation(platform("org.lwjgl:lwjgl-bom:3.3.1"))
+
+    implementation("org.lwjgl", "lwjgl")
+    implementation("org.lwjgl", "lwjgl-glfw")
+    implementation("org.lwjgl", "lwjgl-opengl")
+    runtimeOnly("org.lwjgl", "lwjgl", classifier = "natives-windows")
+    runtimeOnly("org.lwjgl", "lwjgl-glfw", classifier = "natives-windows")
+    runtimeOnly("org.lwjgl", "lwjgl-opengl", classifier = "natives-windows")
 }
 
 tasks.test {
@@ -20,5 +27,5 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "13"
+    kotlinOptions.jvmTarget = "1.8"
 }

@@ -5,11 +5,9 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.InputStreamReader
 
-object FileSystem
-{
+object FileSystem {
 
-    fun read(file: File): String
-    {
+    fun read(file: File): String {
         val stringBuilder = StringBuilder()
         val fileInputStream = FileInputStream(file)
         val bufferedReader = BufferedReader(InputStreamReader(fileInputStream))
